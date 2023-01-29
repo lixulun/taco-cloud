@@ -11,6 +11,9 @@ xmlns:th="http://www.thymeleaf.org">
     <img th:width="300px" th:height="200px" th:src="@{/images/TacoCloud.jpeg}" alt="Logo">
     <form method="POST" th:object="${taco}">
         <h3>Designate your wrap:</h3>
+
+        <div th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">Error</div>
+
         <div th:each="ingredient : ${wrap}">
             <input type="checkbox" th:field="*{ingredients}"
                 th:value="${ingredient.id}">
@@ -48,6 +51,7 @@ xmlns:th="http://www.thymeleaf.org">
         <div>
             <h3>Name your taco creation:</h3>
             <input type="text" th:field="*{name}">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</span>
         </div>
 
         <button>Submit Your Taco</button>
